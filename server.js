@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
         minPrice=req.query.min,
         type=req.query.type,
         page=req.query.page || 1,
-        domain=(req.query.domain || 'propertyfinder')+'.js';
+        domain=(req.query.domain || 'justproperty')+'.js';
 
     var args = [
         'casperjs',
