@@ -1,5 +1,6 @@
 var casper = require('casper').create({
     verbose: true,
+    logLevel : 'debug',
     viewportSize: {
         width: 1300,
         height: 1600
@@ -39,11 +40,28 @@ casper.userAgent('Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML,
 casper.start(url, function() {
     
 });
+// console.log(beds);
 casper.then(function() {
     
-    this.evaluate(function(location) {
+    this.evaluate(function(location,minPrice,maxPrice,beds,type) {
+        
+        if(beds){
+            if(beds>6)
+                beds=6;
+            $("#id_bedrooms").val(beds);
+        }
+        if(minPrice){
+            $('input.id_price_min').focus().val(minPrice).trigger('input').blur();
+        }
+        if(maxPrice){
+            $('input.id_price_max').focus().val(maxPrice).trigger('input').blur();
+        }
+        if(type==1){
+            // setting to buy
+            $(".hybrid-tabs a:nth-child(2)").click();
+        }
         $('.ui-autocomplete-input').val(location).trigger('input');
-    },loc)
+    },loc,minPrice,maxPrice,beds,type)
     this.waitUntilVisible(".ui-menu-item", function() {
         this.evaluate(function() {
             $('.ui-menu-item:first').click();
@@ -51,15 +69,22 @@ casper.then(function() {
     });
 
 });
+casper.then(function()
+{
+    this.capture('a.png');
+});
 casper.then(function() {
     this.evaluate(function() {
         $(".btn-ser-search-default").click();
     })
 });
-/*casper.then(function()
-{
-	this.capture('after-submit.png');
-});*/
+casper.then(function()
+{ 
+    this.evaluate(function()
+    {
+        $('.results_order_by').val("price__asc").change();
+    })
+});
 casper.then(function() {
     properties = this.evaluate(function() {
         var elms = [];
