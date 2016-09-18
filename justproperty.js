@@ -1,6 +1,5 @@
 var casper = require('casper').create({
-    verbose: true,
-    logLevel : 'debug',
+    verbose: true
     viewportSize: {
         width: 1300,
         height: 1600
