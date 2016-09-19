@@ -81,9 +81,9 @@ casper.then(function() {
         if(maxPrice)
         query+='&price_max='+maxPrice;
 
-        var elms = {
-            'uri' : encodeURIComponent(document.location.href+query)
-        };
+        var elms = [{
+                    'uri' : encodeURIComponent(document.location.href+query)
+                }];
         return elms;
     },order,minPrice,maxPrice,perPage);
 });
