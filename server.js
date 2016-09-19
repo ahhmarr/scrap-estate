@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
         type=req.query.type,
         page=req.query.page || 1,
         uri=req.query.uri,
-        domain=(req.query.domain || 'justproperty')+'.js';
+        domain=(req.query.domain || 'propertyfinder')+'.js';
     var args = [
         'casperjs',
         domain
