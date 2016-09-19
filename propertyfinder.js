@@ -13,8 +13,6 @@ var page = options.page || 1;
 var type = options.type || 2; //rent or buy 1 buy 2 rent
 var url = 'https://www.propertyfinder.ae/search?l=' + loc + '&q=&c=' + type + '&t=&rp=y&pf=' + minPrice + '&pt=' + maxPrice + '&bf=' + beds + '&page=' + page + '&ob=pa' //ob=pd for price des;
 var properties = [];
-console.log(url);
-
 casper.userAgent('Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36');
 
 function getLinks() {
