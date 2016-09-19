@@ -85,7 +85,7 @@ casper.then(function() {
                     'uri' : encodeURIComponent(scrapAPI+document.location.href+query)
                 }];
         return elms;
-    },order,minPrice,maxPrice,perPage);
+    },order,minPrice,maxPrice,perPage,scrapAPI);
 });
 
 casper.run(function() {
