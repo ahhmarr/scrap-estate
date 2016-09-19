@@ -12,8 +12,8 @@ app.get('/', function (req, res) {
         minPrice=req.query.min,
         type=req.query.type,
         page=req.query.page || 1,
+        uri=req.query.uri,
         domain=(req.query.domain || 'justproperty')+'.js';
-
     var args = [
         'casperjs',
         domain
@@ -30,6 +30,8 @@ app.get('/', function (req, res) {
     args.push('--type="'+type+'"');
   if(type)
     args.push('--page="'+page+'"');
+  if(uri)
+    args.push('--uri="'+uri+'"');
 
     var cmd = args.join(" ");
 
