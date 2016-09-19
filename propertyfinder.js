@@ -1,6 +1,9 @@
 var casper = require('casper').create({
-    verbose: true
-    /*,
+    verbose: true,
+    viewportSize: {
+        width: 1300,
+        height: 1600
+    }/*
 	logLevel : 'debug'*/
 });
 
@@ -11,6 +14,7 @@ var minPrice = options.minPrice || '';
 var maxPrice = options.maxPrice || '';
 var page = options.page || 1;
 var type = options.type || 2; //rent or buy 1 buy 2 rent
+var URI = options.uri || '';
 var url = 'https://www.propertyfinder.ae/search?l=' + loc + '&q=&c=' + type + '&t=&rp=y&pf=' + minPrice + '&pt=' + maxPrice + '&bf=' + beds + '&page=' + page + '&ob=pa' //ob=pd for price des;
 var properties = [];
 casper.userAgent('Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36');
@@ -51,9 +55,13 @@ function getLinks() {
         data: elms
     };;
 }
-casper.start(url, function() {
+casper.start(URI || url, function() {
     properties = this.evaluate(getLinks)
 });
+casper.then(function()
+{
+    casper.capture('fimder.png');
+})
 casper.run(function() {
     this.echo(JSON.stringify(properties));
     casper.done();
