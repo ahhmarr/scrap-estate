@@ -3,6 +3,11 @@ var bodyParser = require('body-parser');
 var exec = require('child_process').exec;
 var fs = require('fs');
 var shellescape = require('shell-escape');
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use(bodyParser.json());
 app.get('/', function (req, res) {
