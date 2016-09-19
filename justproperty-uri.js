@@ -62,7 +62,7 @@ casper.then(function() {
     });
 
 });
-
+var scrapAPI="http://scrap.dev:3001/?domain=justproperty&uri=";
 casper.then(function() {
     this.evaluate(function() {
         $(".btn-ser-search-default").click();
@@ -82,7 +82,7 @@ casper.then(function() {
         query+='&price_max='+maxPrice;
 
         var elms = [{
-                    'uri' : encodeURIComponent(document.location.href+query)
+                    'uri' : encodeURIComponent(scrapAPI+document.location.href+query)
                 }];
         return elms;
     },order,minPrice,maxPrice,perPage);
