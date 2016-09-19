@@ -70,7 +70,7 @@ casper.then(function() {
 });
 
 casper.then(function() {
-    properties = this.evaluate(function(order,minPrice,maxPrice,perPage) {
+    properties = this.evaluate(function(order,minPrice,maxPrice,perPage,scrapAPI) {
         perPage=perPage || 30;
         order=order || 'price__asc';
 
