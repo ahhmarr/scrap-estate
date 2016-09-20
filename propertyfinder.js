@@ -3,8 +3,9 @@ var casper = require('casper').create({
     viewportSize: {
         width: 1300,
         height: 1600
-    }/*
-	logLevel : 'debug'*/
+    }
+    /*
+    logLevel : 'debug'*/
 });
 
 var options = casper.cli.options;
@@ -45,21 +46,31 @@ function getLinks() {
             area: area
         });
     });
+    var total = $('.page-numbers a:last').text().trim();
+    var current = $('.page-numbers span').text().trim();
+    var next = $('#pagination').find('.next a').attr('href');
+
+    var pages = {
+        'total': '',
+        'current': '',
+        'next': ''
+    }
+    if (total)
+        pages.total = total;
+    if (current)
+        pages.current = current;
+    if (next)
+        pages.next = 'https://www.propertyfinder.ae' + next;
     return {
         'uri': document.location.href,
-        'pages': {
-            'total': $('.page-numbers a:last').text().trim(),
-            'current': $('.page-numbers span').text().trim(),
-            'next': 'https://www.propertyfinder.ae' + $('#pagination').find('.next a').attr('href')
-        },
+        'pages': pages,
         data: elms
     };;
 }
 casper.start(URI || url, function() {
     properties = this.evaluate(getLinks)
 });
-casper.then(function()
-{
+casper.then(function() {
     casper.capture('fimder.png');
 })
 casper.run(function() {

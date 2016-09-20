@@ -1,5 +1,6 @@
 var casper = require('casper').create({
-    verbose: true,
+    verbose: true,/*
+    logLevel : 'debug',*/
     viewportSize: {
         width: 1300,
         height: 1600
@@ -59,13 +60,24 @@ casper.then(function() {
                         area: area
                     });
                 });
+                var total=$('.endless_page_link:last').prev().text().trim();
+                var current=$('.endless_page_current').text().trim();
+                var next=$('.endless_page_link:last').attr('href');
+
+                var pages={
+                        'total' :'',
+                        'current' :'' ,
+                        'next'  :''
+                    }
+                if(total)
+                    pages.total=total;
+                if(current)
+                    pages.current=current;
+                if(next)
+                    pages.next='https://www.justproperty.com'+next;
                 return {
                     'uri': document.location.href,
-                    'pages' : {
-                        'total' :$('.endless_page_link:last').prev().text().trim(),
-                        'current' : $('.endless_page_current').text().trim(),
-                        'next'  :'https://www.justproperty.com'+$('.endless_page_link:last').attr('href')
-                    },
+                    'pages' : pages,
                     data: elms
                 };
             
