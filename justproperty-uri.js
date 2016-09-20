@@ -62,7 +62,7 @@ casper.then(function() {
     });
 
 });
-var scrapAPI="http://scrap.dev:3001/?domain=justproperty&uri=";
+var scrapAPI="http://45.55.250.112:3001/?domain=justproperty&uri=";
 casper.then(function() {
     this.evaluate(function() {
         $(".btn-ser-search-default").click();
